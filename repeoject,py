@@ -1,0 +1,32 @@
+import geopandas as gpd
+import matplotlib.pyplot as plt
+
+# Define the path to your shapefile
+shapefile_path = "C:\\Users\\prath\\Documents\\OPEN_SCRUB.shp"  # Update this path as needed
+
+# Read the shapefile
+gdf = gpd.read_file(shapefile_path)
+
+# Print the CRS to confirm it is EPSG:4326
+print("Initial CRS:", gdf.crs)
+
+# Define the target CRS (e.g., UTM Zone 33N)
+target_crs = 'EPSG:32643'
+
+# Reproject the GeoDataFrame to the target CRS
+gdf_reprojected = gdf.to_crs(target_crs)
+
+# Print the new CRS to confirm
+print("Reprojected CRS:", gdf_reprojected.crs)
+
+# Create a figure and axis for plotting
+fig, ax = plt.subplots(figsize=(10, 10))
+
+# Plot the reprojected GeoDataFrame
+gdf_reprojected.plot(ax=ax, color='white', edgecolor='black')
+
+# Set the title
+ax.set_title('Reprojected')
+
+# Display the plot
+plt.show()
